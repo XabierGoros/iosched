@@ -27,8 +27,6 @@ android {
     defaultConfig {
         minSdkVersion(Versions.MIN_SDK)
         targetSdkVersion(Versions.TARGET_SDK)
-        versionCode = 1
-        versionName = "1.0"
         testInstrumentationRunner = "androidx.benchmark.junit4.AndroidBenchmarkRunner"
     }
 
@@ -37,7 +35,6 @@ android {
         getByName("staging") {
             initWith(getByName("debug"))
             isDefault = true
-            versionNameSuffix = "-staging"
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
 

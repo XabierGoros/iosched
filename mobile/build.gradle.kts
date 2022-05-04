@@ -206,6 +206,7 @@ dependencies {
     kapt(Libs.LIFECYCLE_COMPILER)
     testImplementation(Libs.ARCH_TESTING)
     implementation(Libs.NAVIGATION_FRAGMENT_KTX)
+    implementation("androidx.navigation:navigation-compose:2.4.2")
     implementation(Libs.NAVIGATION_UI_KTX)
     implementation(Libs.ROOM_KTX)
     implementation(Libs.ROOM_RUNTIME)
