@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,12 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     id("androidx.benchmark")
     kotlin("kapt")
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
     defaultConfig {
         minSdkVersion(Versions.MIN_SDK)
         targetSdkVersion(Versions.TARGET_SDK)
@@ -42,7 +41,7 @@ android {
             // plugin should try to use when a dependency does not include a
             // "staging" build type.
             // Used with :test-shared, which doesn't have a staging variant.
-            setMatchingFallbacks(listOf("debug"))
+            matchingFallbacks += listOf("debug")
         }
     }
 

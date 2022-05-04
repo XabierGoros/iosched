@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,37 +17,36 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    compileSdk = Versions.COMPILE_SDK
     defaultConfig {
         minSdkVersion(Versions.MIN_SDK)
         targetSdkVersion(Versions.TARGET_SDK)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "CONFERENCE_TIMEZONE", properties["conference_timezone"] as String)
-        buildConfigField("String", "CONFERENCE_DAY1_START", properties["conference_day1_start"] as String)
-        buildConfigField("String", "CONFERENCE_DAY1_END", properties["conference_day1_end"] as String)
-        buildConfigField("String", "CONFERENCE_DAY2_START", properties["conference_day2_start"] as String)
-        buildConfigField("String", "CONFERENCE_DAY2_END", properties["conference_day2_end"] as String)
-        buildConfigField("String", "CONFERENCE_DAY3_START", properties["conference_day3_start"] as String)
-        buildConfigField("String", "CONFERENCE_DAY3_END", properties["conference_day3_end"] as String)
+        buildConfigField("String", "CONFERENCE_TIMEZONE", project.properties["conference_timezone"] as String)
+        buildConfigField("String", "CONFERENCE_DAY1_START", project.properties["conference_day1_start"] as String)
+        buildConfigField("String", "CONFERENCE_DAY1_END", project.properties["conference_day1_end"] as String)
+        buildConfigField("String", "CONFERENCE_DAY2_START", project.properties["conference_day2_start"] as String)
+        buildConfigField("String", "CONFERENCE_DAY2_END", project.properties["conference_day2_end"] as String)
+        buildConfigField("String", "CONFERENCE_DAY3_START", project.properties["conference_day3_start"] as String)
+        buildConfigField("String", "CONFERENCE_DAY3_END", project.properties["conference_day3_end"] as String)
 
-        buildConfigField("String", "CONFERENCE_DAY1_AFTERHOURS_START", properties["conference_day1_afterhours_start"] as String)
-        buildConfigField("String", "CONFERENCE_DAY2_CONCERT_START", properties["conference_day2_concert_start"] as String)
+        buildConfigField("String", "CONFERENCE_DAY1_AFTERHOURS_START", project.properties["conference_day1_afterhours_start"] as String)
+        buildConfigField("String", "CONFERENCE_DAY2_CONCERT_START", project.properties["conference_day2_concert_start"] as String)
 
         buildConfigField(
             "String",
-            "BOOTSTRAP_CONF_DATA_FILENAME", properties["bootstrap_conference_data_filename"] as String
+            "BOOTSTRAP_CONF_DATA_FILENAME", project.properties["bootstrap_conference_data_filename"] as String
         )
 
         buildConfigField(
             "String",
-            "CONFERENCE_WIFI_OFFERING_START", properties["conference_wifi_offering_start"] as String
+            "CONFERENCE_WIFI_OFFERING_START", project.properties["conference_wifi_offering_start"] as String
         )
 
         consumerProguardFiles("consumer-proguard-rules.pro")
@@ -76,16 +75,16 @@ android {
             // plugin should try to use when a dependency does not include a
             // "staging" build type.
             // Used with :test-shared, which doesn't have a staging variant.
-            setMatchingFallbacks(listOf("debug"))
+            matchingFallbacks += listOf("debug")
         }
     }
 
-    lintOptions {
-        disable("InvalidPackage", "MissingTranslation")
+    lint {
+        disable += listOf("InvalidPackage", "MissingTranslation")
         // Version changes are beyond our control, so don't warn. The IDE will still mark these.
-        disable("GradleDependency")
+        disable += "GradleDependency"
         // Timber needs to update to new Lint API
-        disable("ObsoleteLintCustomCheck")
+        disable += "ObsoleteLintCustomCheck"
     }
 
     // debug and release variants share the same source dir
