@@ -20,6 +20,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -220,7 +221,7 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
             ACTION_VIEW,
             "iosched://sessions?$QUERY_SESSION_ID=${session.id}".toUri()
         )
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_IMMUTABLE
 
         // Create the TaskStackBuilder
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(context)
@@ -266,7 +267,7 @@ class AlarmBroadcastReceiver : BroadcastReceiver() {
             // Add the intent, which inflates the back stack
             .addNextIntentWithParentStack(intent)
             // Get the PendingIntent containing the entire back stack
-            .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE)
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID_FEEDBACK)
             .setContentTitle(session.title)

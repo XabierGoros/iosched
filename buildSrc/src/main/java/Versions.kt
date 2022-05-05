@@ -20,7 +20,7 @@ object Versions {
     val versionCodeMobile = versionCodeBase + 3
 
     const val COMPILE_SDK = 31
-    const val TARGET_SDK = 30
+    const val TARGET_SDK = 31
     const val MIN_SDK = 21
 
     const val ANDROID_GRADLE_PLUGIN = "7.1.2"
@@ -30,7 +30,7 @@ object Versions {
     const val GOOGLE_SERVICES = "4.3.3"
     const val KOTLIN = "1.6.10"
     const val NAVIGATION = "2.4.1"
-    const val HILT_AGP = "2.40.5"
+    const val HILT_AGP = "2.41"
 
     // TODO: Remove this once the version for
     //  "org.threeten:threetenbp:${Versions.threetenbp}:no-tzdb" using java-platform in the

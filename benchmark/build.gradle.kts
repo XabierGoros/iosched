@@ -24,8 +24,8 @@ plugins {
 android {
     compileSdk = Versions.COMPILE_SDK
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+        minSdkVersion(Versions.MIN_SDK)
+        targetSdkVersion(Versions.TARGET_SDK)
         testInstrumentationRunner = "androidx.benchmark.junit4.AndroidBenchmarkRunner"
     }
 
@@ -43,6 +43,12 @@ android {
             // Used with :test-shared, which doesn't have a staging variant.
             matchingFallbacks += listOf("debug")
         }
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/licenses/**")
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
 
     testBuildType = "staging"
